@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from 'axios';
 import './LoginTemplate.scss';
-import UserAPI from 'lib/api/user';
+// import UserAPI from 'lib/api/user';
 
 import HeaderTemplate from 'components/header/HeaderTemplate';
 import ReturnTemplate from 'components/return/ReturnTemplate';
@@ -15,7 +15,8 @@ class LoginTemplate extends Component {
       email: '',
       password: '',
       autoLogin: false,
-      mobile: (window.innerWidth < 767)
+      mobile: (window.innerWidth < 767),
+      token: ''
     };
   }
 
@@ -23,14 +24,19 @@ class LoginTemplate extends Component {
   handleIdChange = (e) => {this.setState({email: e.target.value});};
   handlePwChange = (e) => {this.setState({password: e.target.value});};
   signIn = () => {
-    // alert('Id : ' + this.state.id + ', Pw : ' + this.state.password);
-    console.log('Id : ' + this.state.id + ', Pw : ' + this.state.password);
+    console.log('Id(email) : ' + this.state.email + ', Pw : ' + this.state.password);
     axios.post(
       'http://morethanchat.tk:8080/login',{
         "email": this.state.email,
         "passWd": this.state.password
     }).then(res => {
       console.log(res);
+      if(res.data.status === 200) {
+        this.setState({
+          ...this.state,
+          token: res.data.response
+        });
+      }
     }).catch(err => {
       console.log(err);
     })
