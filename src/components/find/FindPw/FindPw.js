@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import './FindPw.scss';
 
 import * as UserAPI from "lib/api/user";
+import PhoneAuth from "components/find/FindId/FindId";
 
 const FindPw = (props) => {
   const [hiddenSend, setHiddenSend] = useState(true);
@@ -66,16 +67,28 @@ const FindPw = (props) => {
     }
   };
 
+  const getPhoneNum = (data) => {
+    setPhoneNum(data.phoneNum);
+    // if(data.existUser) {
+    //   setCheckExistUser(data.existUser);
+    //   setExistUserEmail(data.userEmail);
+    // }
+  };
+
+
   return (
-    <div className="find-section">
+    <div className="find-section find-pw">
       <div className="find-top">
         <p className="find-top__title">비밀번호 찾기</p>
       </div>
       <div className="find-inputs">
-        <p className="find-inputs__title">아이디(이메일 주소)<em>*</em></p>
-        <div className="find-inputs__value-wrapper">
-          <input className="find-inputs__value" onChange={handleEmailChange} placeholder="ex. czer01ne@gmail.com"/>
+        <div className="input-container">
+          <p className="inputs__title">아이디(이메일 주소)<em>*</em></p>
+          <div className="inputs__value-wrapper">
+            <input className="inputs__value" onChange={handleEmailChange} placeholder="ex. czer01ne@gmail.com"/>
+          </div>
         </div>
+        {/*<PhoneAuth name={email} callback={getPhoneNum}/>*/}
         <p className="find-inputs__title">휴대폰 번호<em>*</em></p>
         <div className="find-inputs__value-wrapper">
           <input type="tel" className="find-inputs__value" onChange={handlePhoneChange} disabled={!hiddenSend} placeholder="010-1234-5678"/>

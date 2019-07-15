@@ -47,7 +47,7 @@ const EmailAuth = (props) => {
         <p className="email-auth-input inputs__tip" hidden={hiddenAuth}>
           가입 가능한 아이디입니다.
         </p>
-        {/*<p className="email-auth-input inputs__tip" hidden={existingEmail}>이미 존재하는 아이디입니다.</p>*/}
+        <p className="email-auth-input inputs__tip" hidden={existingEmail}>이미 존재하는 아이디입니다.</p>
       </div>
     </Fragment>
   )

@@ -6,6 +6,7 @@ import * as UserAPI from "lib/api/user";
 const PhoneAuth = (props) => {
 
   const [phoneNum, setPhoneNum] = useState('');
+  const [showPhoneNum, setShowPhoneNum] = useState('');
   const [authNum, setAuthNum] = useState('');
   const [authBtnText, setAuthBtnText] = useState('인증');
 
@@ -38,7 +39,8 @@ const PhoneAuth = (props) => {
 
   const handleInputChange = (e) => {
     if(e.target.id === "input-phoneNum") {  // 예외처리 해야됨.
-      setPhoneNum(formatMobile(e.target.value));
+      setPhoneNum(e.target.value);
+      setShowPhoneNum(formatMobile(e.target.value));
     } else if(e.target.id === "input-authNum") {
       setAuthNum(e.target.value);
     }
@@ -58,10 +60,11 @@ const PhoneAuth = (props) => {
             }
             setAuthSend(true);
             setAuthBtnText('인증버튼 재전송');
+            alert('임시 인증번호 : 1234');
             console.log(res);
           })
           .catch(err => {
-            console.log('[error] phone auth using name, phoneNum');
+            console.log('[error] phone auth error in phoneAuth using name, phoneNum');
             setAuthBtnText('인증');
             console.log(err);
           });
@@ -71,7 +74,7 @@ const PhoneAuth = (props) => {
         setAuthBtnText('인증');
       }
     } else if (e.target.id === "auth_confirm_btn") {
-      if(authNum.length > 3) {
+      if(authNum === '1234') {
         alert('인증 완료!'); // 임시.. 인증 제대로 갖춰지면 코드 변경해야됨.
         setAuthComplete(true);
 
@@ -100,7 +103,7 @@ const PhoneAuth = (props) => {
       <div className="input-container">
         <p className="inputs__title">휴대폰 번호<em>*</em></p>
         <div className="inputs__value-wrapper">
-          <input type="tel" id="input-phoneNum" className="inputs__value" onChange={handleInputChange} disabled={authSend} value={phoneNum} placeholder="010-1234-5678"/>
+          <input type="tel" id="input-phoneNum" className="inputs__value" onChange={handleInputChange} disabled={authSend} value={showPhoneNum} placeholder="010-1234-5678"/>
           <button id="auth_send_btn" onClick={buttonClick}>{authBtnText}</button>
         </div>
           {

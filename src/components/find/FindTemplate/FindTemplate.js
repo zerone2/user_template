@@ -5,6 +5,7 @@ import './FindTemplate.scss';
 import ReturnTemplate from "components/return/ReturnTemplate";
 import FindId from "components/find/FindId";
 import FindPw from "components/find/FindPw";
+import HeaderTemplate from "components/header/HeaderTemplate";
 
 class FindTemplate extends Component {
 
@@ -33,9 +34,12 @@ class FindTemplate extends Component {
     let state = this.state;
     return(
       <div className="find-template">
-        <ReturnTemplate
-          params='login'
-        />
+        {
+          this.state.mobile ?
+            <HeaderTemplate/>
+            :
+            <ReturnTemplate params='login'/>
+        }
         {state.findObject === 'id' ? <FindId/> : <FindPw/>}
       </div>
     )
