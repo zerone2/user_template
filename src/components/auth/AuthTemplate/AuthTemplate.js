@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import { withRouter } from 'react-router-dom';
-import { DatePicker } from '@y0c/react-datepicker';
+// import { DatePicker } from '@y0c/react-datepicker';
 import '@y0c/react-datepicker/assets/styles/calendar.scss';
 import './AuthTemplate.scss';
 
@@ -14,16 +14,15 @@ const AuthTemplate = (props) => {
   const [phoneNum, setPhoneNum] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState(null);
-  const [date, setDate] = useState(new Date());
+  const [birth, setBirth] = useState(new Date());
   const [knownPath, setKnownPath] = useState('');
 
   const [isNameValid, setIsNameValid] = useState(false);
-  const [authString, setAuthString] = useState('');
-
   const [inputValidate, setInputValidate] = useState(null);   // 적용예정. 붉은 테두리, 초록테두리로 구분예정.
+  const [passwordCheck, setPasswordCheck] = useState(false);
 
   const [checkExistUser, setCheckExistUser] = useState(false);
-  const [existUserEmail, setExistUserEmail] = useState('');
+  // const [existUserEmail, setExistUserEmail] = useState('');
 
 
   const validateName = name => {
@@ -43,12 +42,16 @@ const AuthTemplate = (props) => {
       validateName(e.target.value);
     } else if (e.target.id === 'input-phoneNum') {
       setPhoneNum(e.target.value);
-    } else if (e.target.id === 'input-auth') {
-      setAuthString(e.target.value);
+    } else if (e.target.id === 'input-birth') {
+      setBirth(e.target.value);
     }
   };
 
   const buttonClick = (e) => {
+    if (!passwordCheck) {
+      alert('비밀번호가 올바르지 않습니다.\n다시 한번 확인해주세요.');
+      return;
+    }
     if (e.target.id === 'signup-complete-btn') { // 회원가입 구현부 세부수정 필요.
       UserAPI.createNewUser(
         {
@@ -56,7 +59,7 @@ const AuthTemplate = (props) => {
           passWd: password,
           name: name,
           phoneNum: phoneNum,
-          birth: date,
+          birth: birth,
           knownPath: knownPath
         }
       ).then(res => {
@@ -72,19 +75,19 @@ const AuthTemplate = (props) => {
     }
   };
 
-  const dateChange = (date) => {
-    // Day.js object
-    // console.log(date);
-    setDate(date);
-    console.log(date);
-  };
-
-  const locale = {
-    name: 'ko',
-    weekdays: '일요일_월요일_화요일_수요일_목요일_금요일_토요일'.split('_'),
-    weekdaysShort: '일_월_화_수_목_금_토'.split('_'),
-    months: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
-  };
+  // const dateChange = (date) => {
+  //   // Day.js object
+  //   // console.log(date);
+  //   setBirth(date);
+  //   console.log(date);
+  // };
+  //
+  // const locale = {
+  //   name: 'ko',
+  //   weekdays: '일요일_월요일_화요일_수요일_목요일_금요일_토요일'.split('_'),
+  //   weekdaysShort: '일_월_화_수_목_금_토'.split('_'),
+  //   months: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
+  // };
 
   const selectChange = (e) => {
     setKnownPath(e.target.value);
@@ -95,11 +98,20 @@ const AuthTemplate = (props) => {
     setPhoneNum(data.phoneNum);
     if(data.existUser) {
       setCheckExistUser(data.existUser);
-      setExistUserEmail(data.userEmail);
+      // setExistUserEmail(data.userEmail);
+    } else {
+      setCheckExistUser(false);
+      // setExistUserEmail('');
     }
   };
   const getEmail = (data) => {setEmail(data);};
-  const getPassword = (data) => {setPassword(data);};
+  const getPassword = (data) => { // set user password
+    if(data.pwLengthCheck && data.passwordMatch) {
+      setPassword(data.password);
+      setPasswordCheck(data.passwordMatch); // check password === passwordCheck
+    }
+    else setPassword('');
+  };
 
   return (
     <div className="auth-template">
@@ -112,7 +124,7 @@ const AuthTemplate = (props) => {
           </div>
         </div>
 
-        <PhoneAuth name={name} callback={getPhoneNum}/>
+        <PhoneAuth inputValue={"name"} name={name} callback={getPhoneNum}/>
         { /* if user already exists, return back to login page */
           checkExistUser ?
             <Fragment>
@@ -122,12 +134,15 @@ const AuthTemplate = (props) => {
             :
             <Fragment>
               <EmailAuth name={name} phoneNum={phoneNum} callback={getEmail}/>
-              <PasswordCheck callback={getPassword}/>
+              <PasswordCheck reset={false} callback={getPassword}/>
 
               <div className="input-2-container">
                 <div className="input-container">
                   <p className="inputs__title">생년월일<em>*</em></p>
-                  <DatePicker className="inputs__value" locale={locale} onChange={dateChange} showDefaultIcon/>
+                  <div className="inputs__value-wrapper">
+                    <input type="text" id="input-birth" className="inputs__value" onChange={handleInputChange} placeholder="ex. 1990-01-01"/>
+                  </div>
+                  {/*<DatePicker className="inputs__value" locale={locale} onChange={dateChange} showDefaultIcon/>*/ /* 모듈문제. 임시 삭제 조치. */ }
                 </div>
                 <div className="input-container">
                   <p className="inputs__title">모른챗을 알게 된 경로<em>*</em></p>

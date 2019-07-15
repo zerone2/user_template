@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 import './FindId.scss';
 
 import PhoneAuth from 'components/auth/PhoneAuth';
-import * as UserAPI from 'lib/api/user';
 
 const FindId = (props) => {
 
-  const [hiddenSend, setHiddenSend] = useState(true);
-  const [hiddenAuth, setHiddenAuth] = useState(true);
   const [name, setName] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
 
@@ -21,19 +18,7 @@ const FindId = (props) => {
     }
   };
 
-  const buttonClick = (e) => {
-    if(e.target.id === 'auth_confirm_btn') {
-      // if(returnAuthString === inputAuthString) {
-        alert('인증완료!');
-        setHiddenAuth(false);
-      // }
-      // else {
-      //   alert('인증실패!');
-      //   setHiddenAuth(true);
-      // }
-    }
-  };
-
+  // callback func
   const getPhoneNum = (data) => {
     setPhoneNum(data.phoneNum);
     if(data.existUser) {
@@ -54,7 +39,7 @@ const FindId = (props) => {
             <input type="text" id="input-name" className="inputs__value" onChange={handleInputChange} placeholder="ex. 조영일" required/>
           </div>
         </div>
-        <PhoneAuth name={name} callback={getPhoneNum}/>
+        <PhoneAuth inputValue={"name"} name={name} callback={getPhoneNum}/>
         <div className="input-container" style={{display: phoneNum === "" ? 'none' : 'block'}}>
           {
             checkExistUser ?

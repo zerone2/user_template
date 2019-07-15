@@ -26,9 +26,12 @@ export const findUserPassword = (email, phoneNum) => {
   });
 };
 
-export const updatePassword = (email, phoneNum) => {
-  return defaultClient.put('/users/forget/passWd', {
-    "email": email,
-    "phoneNum": phoneNum
+export const updatePassword = (token, password) => {
+  return defaultClient.put('/users/pass', {
+    "passWd": password,
+  }, {
+    "headers": {
+      "Authorization": "EROMTHAN" + token
+    }
   })
 };

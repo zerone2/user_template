@@ -17,18 +17,26 @@ const PasswordCheck = (props) => {
       setInputPassword(e.target.value);
     }
     else if(e.target.id === "input_password_check") {
-      if(inputPassword === e.target.value) {
-        setPasswordMatch(true);
-        props.callback(e.target.value); // pass pw using callback
-      }
+      if(inputPassword === e.target.value) setPasswordMatch(true);
       else setPasswordMatch(false);
+
+      props.callback({ // pass pw using callback
+        pwLengthCheck: pwLengthCheck,
+        password: e.target.value,
+        passwordMatch: true
+      });
     }
   };
 
   return (
     <Fragment>
       <div className="input-container">
-        <p className="pw-auth-input inputs__title">비밀번호<em>*</em></p>
+        {
+          props.reset ?
+            <p className="find-input inputs__title" >새로운 비밀번호 등록<em>*</em></p>
+            :
+            <p className="pw-auth-input inputs__title">비밀번호<em>*</em></p>
+        }
         <div className="pw-auth-input inputs__value-wrapper">
           <input type="password" id="input_password" className="pw-auth-input inputs__value" onChange={handleInputChange} />
         </div>

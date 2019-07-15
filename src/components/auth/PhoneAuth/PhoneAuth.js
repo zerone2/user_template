@@ -15,6 +15,7 @@ const PhoneAuth = (props) => {
   const [authComplete, setAuthComplete] = useState(false);
 
   const [userEmail, setUserEmail] = useState('');
+  const [userToken, setUserToken] = useState('');
 
   // make phone format string
   const formatMobile = (phoneNum) => {
@@ -46,51 +47,83 @@ const PhoneAuth = (props) => {
     }
   };
 
-
   const buttonClick = (e) => {
-    if(e.target.id === "auth_send_btn") {
+    if(e.target.id === 'auth_send_btn') {   // 인증버튼 클릭
       console.log(validatePhone(phoneNum));
       if(validatePhone(phoneNum)) {
         setIsValidatedNum(true);
-        UserAPI.findUserId(props.name, phoneNum) // 임시
-          .then(res => {
-            console.log('[success] findUserId in phoneAuth');
-            if (res.data.status === 200) {
-              setUserEmail(res.data.response.email);
-            }
-            setAuthSend(true);
-            setAuthBtnText('인증버튼 재전송');
-            alert('임시 인증번호 : 1234');
-            console.log(res);
-          })
-          .catch(err => {
-            console.log('[error] phone auth error in phoneAuth using name, phoneNum');
-            setAuthBtnText('인증');
-            console.log(err);
-          });
+        if(props.inputValue === 'name') { // find id / name + phoneNum 조합으로 찾기.
+          UserAPI.findUserId(props.name, phoneNum) // 임시 -> 추후에 핸드폰 인증모듈로 변경해야됨.
+            .then(res => {
+              console.log('[success] findUserId in phoneAuth');
+              if (res.data.status === 200) {
+                setUserEmail(res.data.response.email);
+              }
+              setAuthSend(true);
+              setAuthBtnText('인증버튼 재전송');
+              alert('임시 인증번호 : 1234');
+              console.log(res);
+            })
+            .catch(err => {
+              console.log('[error] phoneAuth error in findUserId using name, phoneNum');
+              setAuthBtnText('인증');
+              console.log(err);
+            });
+        } else {  // find password / email + phoneNum 조합으로 찾기.
+          UserAPI.findUserPassword(props.email, phoneNum)
+            .then(res => {
+              console.log('[success] findUserPassword in phoneAuth');
+              if (res.data.status === 200) {
+                setUserToken(res.data.response);
+              }
+              setAuthSend(true);
+              setAuthBtnText('인증버튼 재전송');
+              alert('임시 인증번호 : 1234');
+              console.log(res);
+            })
+            .catch(err => {
+              console.log('[error] phoneAuth error in findUserPassword using email, phoneNum');
+              setAuthBtnText('인증');
+              console.log(err);
+            });
+        }
       } else {
         alert('인증 요청 실패');
         setIsValidatedNum(false);
         setAuthBtnText('인증');
       }
-    } else if (e.target.id === "auth_confirm_btn") {
+    } else if (e.target.id === 'auth_confirm_btn') {  // 인증확인 버튼 클릭
       if(authNum === '1234') {
         alert('인증 완료!'); // 임시.. 인증 제대로 갖춰지면 코드 변경해야됨.
         setAuthComplete(true);
 
-        if(userEmail !== '' && userEmail !== null) {
-          props.callback({
-            phoneNum: phoneNum,
-            existUser: true,
-            userEmail: userEmail
-          });
+        if(props.inputValue === 'name') {
+          if (userEmail !== '' && userEmail !== null) {
+            props.callback({
+              phoneNum: phoneNum,
+              existUser: true,
+              userEmail: userEmail
+            });
+          } else {
+            props.callback({
+              phoneNum: phoneNum,
+              existUser: false
+            });
+          }
         } else {
-          props.callback({
-            phoneNum: phoneNum,
-            existUser: false
-          });
+          if (userToken !== '' && userToken !== null) {
+            props.callback({
+              phoneNum: phoneNum,
+              existUser: true,
+              userToken: userToken
+            });
+          } else {
+            props.callback({
+              phoneNum: phoneNum,
+              existUser: false
+            });
+          }
         }
-
       } else {
         alert('인증 실패!\n4자리 이상으로 입력해주세요.'); // 임시.
         setAuthComplete(false);

@@ -16,13 +16,13 @@ const EmailAuth = (props) => {
       .then(res => {
         console.log('[success] findUserId in email auth');
         console.log(res);
-        if(res.status === 200) { // email already exists
-          alert('이미 가입된 아이디가 존재합니다!');
-          setHiddenAuth(true);
-          setExistingEmail(res.response.email);
+        setHiddenAuth(false);
+        if(res.data.status === 200) { // email already exists
+          alert('이미 가입된 아이디가 존재합니다!\n\'아이디 찾기\'를 이용해주세요.');
+          setExistingEmail(true);
+          props.callback(null);
         } else {                // new email
-          setHiddenAuth(false);
-          setExistingEmail(null);
+          setExistingEmail('');
           props.callback(inputEmail);
         }
         // setReturnAuthString(''+res.status);
@@ -30,11 +30,9 @@ const EmailAuth = (props) => {
       .catch(err => {
         console.log(err);
         setHiddenAuth(true);
-        alert('이메일 중복확인이실패했습니다.\n30초 뒤에 다시 시도해주세요.');
+        alert('이메일 중복확인이실패했습니다.\n30초 뒤에 다시 시도해주세요.\n안되시면 문의부탁드립니다.');
       });
   };
-
-
 
   return (
     <Fragment>
@@ -44,10 +42,15 @@ const EmailAuth = (props) => {
           <input type="text" id="input-email" className="email-auth-input inputs__value" onChange={handleInputChange} disabled={!hiddenAuth} placeholder="ex. czer01ne@gmail.com"/>
           <button id="duplicate_check_btn auth_btn" onClick={buttonClick}>중복확인</button>
         </div>
-        <p className="email-auth-input inputs__tip" hidden={hiddenAuth}>
-          가입 가능한 아이디입니다.
-        </p>
-        <p className="email-auth-input inputs__tip" hidden={existingEmail}>이미 존재하는 아이디입니다.</p>
+        {
+          hiddenAuth ?
+            ''
+            :
+            <Fragment>
+              <p className="email-auth-input inputs__tip" hidden={existingEmail}>가입 가능한 아이디입니다.</p>
+              <p className="email-auth-input inputs__tip" hidden={!existingEmail}>이미 존재하는 아이디입니다.</p>
+            </Fragment>
+        }
       </div>
     </Fragment>
   )
