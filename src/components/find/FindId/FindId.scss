@@ -1,0 +1,43 @@
+.find-id__result {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 100px;
+  text-align: left;
+
+  p {
+    font-size: 30px;
+    letter-spacing: -0.99px;
+    font-weight: bold;
+    color: #000000;
+  }
+  div {
+    background: #dddddd;
+    width: auto;
+    height: 76px;
+    margin-top: 23px;
+    padding-left: 34px;
+    font-size: 24px;
+    line-height: 76px;
+    letter-spacing: -0.79px;
+  }
+}
+.find-id__btn-area {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 51px 0 0;
+
+  button {
+    background: #ffffff;
+    width: 242px;
+    height: 71px;
+    margin: 0 6px;
+    border: 1px solid #424f5b;
+    font-size: 24px;
+    line-height: 71px;
+    letter-spacing: -0.76px;
+    font-weight: bold;
+    color: #2a7bff;
+  }
+
+}

@@ -1,0 +1,26 @@
+.return-template {
+  position: absolute;
+  top: 50px;
+  left: 120px;
+  //margin-top: 50px;
+  //margin-left: 120px;
+  font-family: Spoqa, sans-serif;
+  font-size: 25px;
+  letter-spacing: -0.83px;
+  color: #9da3ab;
+
+  .return-btn {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    img {
+      width: 15px;
+      height: 23px;
+    }
+    p {
+      margin-left: 32px;
+    }
+  }
+}

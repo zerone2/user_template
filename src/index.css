@@ -1,0 +1,44 @@
+@font-face {
+  font-family: Spoqa;
+  src: url('static/fonts/spoqa/Spoqa_Regular.woff2') format('woff2'), /* WOFF2 지원 브라우저 */
+       url('static/fonts/spoqa/Spoqa_Regular.woff') format('woff'); /* WOFF 지원 브라우저 */
+}
+
+html {
+  -ms-content-zooming: none;
+  -ms-touch-action: pan-x pan-y;
+  overflow-x: hidden;
+  -ms-overflow-x: hidden;
+}
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  -ms-overflow-x: hidden;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Spoqa, 'NanumSquare', "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a, button, a:focus {
+  text-decoration: none;
+  background: none;
+  color: #000000;
+  cursor: pointer;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+p, em {
+  margin: 0;
+  padding: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

@@ -1,0 +1,214 @@
+.auth-template {
+  display: flex;
+  flex-flow: column nowrap;
+
+  .auth-inputs {
+    margin-top: 18px;
+    font-family: Spoqa, sans-serif;
+    color: #000000;
+
+    p {
+      margin-left: 9px;
+      em {color: #ff2a2a;}
+    }
+
+    // input container = title + field + button
+    .input-container {
+      margin-top: 42px;
+
+      // input title
+      .inputs__title {
+        text-align: left;
+        font-size: 21.5px;
+        letter-spacing: -0.71px;
+      }
+      // input field
+      .inputs__value-wrapper {
+        background: #ffffff;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        width: 545px;
+        height: 66px;
+        margin-top: 14px;
+        border: 1px solid #424f5b;
+
+        .inputs__value {
+          width: 100%;
+          height: 100%;
+          padding: 0 20px;
+          border: 0;
+          text-align: left;
+          font-size: 21.5px;
+          letter-spacing: -0.71px;
+          color: #000000;
+
+          &::placeholder {
+            color: #a8adb5;
+          }
+
+          &:disabled {
+            color: #a8adb5;
+          }
+        }
+        button {
+          //width: 90px;
+          height: 66px;
+          padding: 0 24px;
+          border-left: 1px solid #424f5b;
+          text-align: center;
+          white-space: nowrap;
+          font-size: 24px;
+          line-height: 66px;
+          letter-spacing: -0.79px;
+          color: #2a7bff;
+        }
+      }
+    }
+    // give alert or msg
+    .inputs__tip {
+      text-align: left;
+      font-size: 18px;
+      letter-spacing: -0.59px;
+      margin: 13px 0 30px 0;
+      &.error-msg {
+        color: #ff2a2a;
+      }
+    }
+
+    .input-2-container {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      .input-container {
+        display: flex;
+        flex-flow: column nowrap;
+
+        // date picker css
+        .picker {
+          margin-top: 14px;
+          .picker-input {
+            .picker-input__text {
+              width: 174px;
+              height: 63px;
+              padding: 0 20px !important;
+              border: 1px solid #424f5b;
+              font-size: 21.5px;
+            }
+            .picker-input__icon {
+              left: auto;
+              right: 10px;
+            }
+          }
+        }
+
+        &:last-child {
+          width: 100%;
+          margin-left: 20px;
+
+          .inputs__value {
+            background: #ffffff;
+            height: 65px;
+            border: 1px solid #424f5b;
+            border-radius: 0;
+            margin-top: 14px;
+            -webkit-border-radius: 0;
+            -webkit-appearance: none;
+            padding-left: 20px;
+            font-size: 21.5px;
+          }
+        }
+      }
+    }
+    .confirm-btn {
+      background: #2a7bff;
+      width: 100%;
+      height: 91px;
+      margin-top: 42px;
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: -0.96px;
+      color: #ffffff;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .auth-template {
+    .auth-inputs {
+      padding: 0;
+
+      .input-container {
+        width: 250px;
+        margin-top: 15px;
+
+        .inputs__title {
+          font-size: 16px;
+        }
+
+        .inputs__value-wrapper {
+          width: auto;
+          height: 50px;
+          margin-top: 7px;
+
+          .inputs__value {
+            height: 50px;
+            font-size: 15px;
+          }
+          button {
+            height: 50px;
+            padding: 0 15px;
+            font-size: 15px;
+            line-height: 50px;
+          }
+        }
+      }
+      // give alert or msg
+      .inputs__tip {
+        margin: 10px 0 10px 0;
+        font-size: 13px;
+      }
+      .input-2-container {
+        flex-flow: column nowrap;
+
+        .input-container {
+          .picker {
+            margin-top: 14px;
+
+            .picker-input {
+              width: 100%;
+              height: 50px;
+              text-align: left;
+
+              .picker-input__text {
+                width: 100%;
+                height: 50px;
+                max-width: -webkit-fill-available;
+                max-width: -moz-available;
+                max-width: available;
+                font-size: 15px;
+              }
+            }
+          }
+          &:last-child {
+            width: auto;
+            margin-left: 0;
+
+            .inputs__value {
+              height: 50px;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+      .confirm-btn {
+        width: 100%;
+        height: 50px;
+        margin-top: 20px;
+        line-height: 50px;
+        font-size: 18px;
+      }
+    }
+  }
+}
