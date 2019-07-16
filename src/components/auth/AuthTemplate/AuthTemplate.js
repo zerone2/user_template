@@ -116,14 +116,12 @@ const AuthTemplate = (props) => {
   return (
     <div className="auth-template">
       <div className="auth-inputs">
-
         <div className="input-container">
           <p className="inputs__title">이름<em>*</em></p>
           <div className="inputs__value-wrapper">
             <input type="text" id="input-name" className={inputValidate ? "inputs__value validate" : "inputs__value invalidate"} onChange={handleInputChange} placeholder="ex. 조영일" required/>
           </div>
         </div>
-
         <PhoneAuth inputValue={"name"} name={name} callback={getPhoneNum}/>
         { /* if user already exists, return back to login page */
           checkExistUser ?

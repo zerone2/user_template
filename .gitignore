@@ -5,16 +5,19 @@
 /.pnp
 .pnp.js
 
+# Bower dependency directory (https://bower.io/)
+bower_components
+
 # testing
 /coverage
 
+# compiled output
+/dist
+/tmp
+/sessions
+
 # production
 /build
-
-# IDEs
-.idea/
-.idea
-DS_STORE
 
 # misc
 .DS_Store
@@ -23,9 +26,31 @@ DS_STORE
 .env.test.local
 .env.production.local
 
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# others
-overview/
+# IDEs and editors
+.idea/
+.idea
+.project
+.classpath
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# System Files
+.DS_Store
+Thumbs.db

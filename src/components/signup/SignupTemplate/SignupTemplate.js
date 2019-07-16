@@ -20,7 +20,7 @@ class SignupTemplate extends Component {
       <div className="signup-template">
         {
           this.state.mobile ?
-            <HeaderTemplate/>
+            <HeaderTemplate mobile={this.state.mobile}/>
             :
             <ReturnTemplate params='login'/>
         }

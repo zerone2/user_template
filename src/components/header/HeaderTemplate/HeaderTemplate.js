@@ -1,11 +1,18 @@
 import React from 'react';
 import './HeaderTemplate.scss';
 import HeaderMobile from '../HeaderMobile';
+import HeaderDesktop from '../HeaderDesktop';
 
-const HeaderTemplate = () => {
+const HeaderTemplate = (props) => {
+
   return(
     <div className="header-template">
-      <HeaderMobile/>
+      {
+        props.mobile ?
+          <HeaderMobile/>
+          :
+          <HeaderDesktop/>
+      }
     </div>
   )
 };

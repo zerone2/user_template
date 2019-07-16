@@ -1,12 +1,116 @@
 .landing-template {
-  button {
-    background: #61dafb;
-    width: 100px;
-    height: 50px;
-    border: 1px solid #9da3ab;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #ffffff;
+  //button {
+  //  background: #61dafb;
+  //  width: 100px;
+  //  height: 50px;
+  //  border: 1px solid #9da3ab;
+  //  border-radius: 10px;
+  //  font-size: 20px;
+  //  font-weight: bold;
+  //  color: #ffffff;
+  //}
+  .top-section {
+    background: #ffffff;
+    height: 864px;
+    text-align: left;
+
+    p {
+      margin-left: 182px;
+      font-size: 45px;
+      font-weight: bold;
+      line-height: 864px;
+      color: #297bff;
+    }
+  }
+  .second-section {
+    background: #f8f9fb;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 37px 182px;
+
+    .notice-section {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      width: 1035px;
+      font-size: 27px;
+
+      &__title {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        height: 88px;
+        border-bottom: 1px solid #d8d8d8;
+        line-height: 88px;
+
+        span {
+          display: flex;
+          flex-flow: row nowrap;
+          align-content: center;
+          align-items: center;
+
+          img {
+            width: 20px;
+            height: 23px;
+            margin-right: 20px;
+            transform: rotate(180deg);
+          }
+        }
+        button {
+          font-size: 22px;
+        }
+      }
+      &__contents {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        height: 88px;
+        border-bottom: 1px solid #d8d8d8;
+        line-height: 88px;
+
+        p:first-child {
+          margin-right: 40px;
+        }
+      }
+    }
+    .login-section {
+      background: #ffffff;
+      display: flex;
+      flex-flow: column nowrap;
+      height: 144px;
+      padding: 32px;
+
+      .login-comment {
+        font-size: 18px;
+        line-height: 24px;
+        text-align: left;
+        color: #424f5b;
+      }
+      .login-btn {
+        background: #0079ff;
+        width: 343px;
+        height: 69px;
+        margin: 18px 0 12px;
+        border-radius: 8px;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 69px;
+        color: #ffffff;
+      }
+      .user-menus {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        font-size: 14px;
+        line-height: 24px;
+        color: #424f5b;
+
+        p {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+    }
   }
 }

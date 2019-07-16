@@ -10,8 +10,6 @@ import HeaderTemplate from "components/header/HeaderTemplate";
 class FindTemplate extends Component {
 
   constructor(props) {
-    // console.log(props.match);
-
     super(props);
     this.state = {
       findObject: props.match.params.object,
@@ -35,8 +33,8 @@ class FindTemplate extends Component {
     return(
       <div className="find-template">
         {
-          this.state.mobile ?
-            <HeaderTemplate/>
+          state.mobile ?
+            <HeaderTemplate mobile={state.mobile}/>
             :
             <ReturnTemplate params='login'/>
         }

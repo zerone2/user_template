@@ -47,7 +47,7 @@ class LoginTemplate extends Component {
       <div className="login-template">
         {
           this.state.mobile ?
-            <HeaderTemplate/>
+            <HeaderTemplate mobile={true}/>
             :
             <ReturnTemplate params=''/>
         }
